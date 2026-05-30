@@ -1,0 +1,7 @@
+SecurityEvent
+| where EventID == 4625
+| sort by TimeGenerated desc
+
+SecurityEvent
+| where EventID == 4624
+| sort by TimeGenerated desc

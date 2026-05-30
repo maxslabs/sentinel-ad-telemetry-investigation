@@ -1,0 +1,6 @@
+Heartbeat
+| sort by TimeGenerated desc
+
+SecurityEvent
+| where EventID == 4688
+| sort by TimeGenerated desc

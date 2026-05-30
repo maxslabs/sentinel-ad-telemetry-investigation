@@ -1,0 +1,4 @@
+- DCR must explicitly include SecurityEvent channel
+- AMA does not guarantee full ingestion by default
+- Heartbeat ≠ security telemetry
+- Validate logs incrementally
