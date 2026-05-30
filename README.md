@@ -1,3 +1,11 @@
+# Active Directory Telemetry Investigation – Microsoft Sentinel Case Study
+
+![Status](https://img.shields.io/badge/status-incident%20analysis-red)
+![SIEM](https://img.shields.io/badge/SIEM-Microsoft%20Sentinel-blue)
+![Focus](https://img.shields.io/badge/focus-SOC%20engineering-green)
+
+---
+
 # Active Directory SOC Incident Report – Azure Sentinel Lab
 
 ## 1. Executive Summary
@@ -139,4 +147,79 @@ Azure Sentinel, SOC, SIEM, Active Directory, Windows Security Events, Incident R
 - Identified telemetry pipeline breakdown via Azure Arc + AMA + DCR
 - Documented full SOC-style incident report with MITRE mapping
 - Simulated real-world SIEM visibility failure scenario
+
+
+---
+
+## Documentation
+
+- Architecture: `/architecture`
+- Evidence: `/evidence`
+- Logs & Queries: `/kql`
+- Investigation Notes: `/docs`
+
+
+---
+
+## Evidence Pack
+
+This section contains supporting artifacts collected during the investigation.
+
+### 1. Azure Arc Status
+Shows onboarding state of the domain controller within Azure Arc.
+
+![Arc Status](evidence/screenshots/01-arc-status.png)
+
+---
+
+### 2. Azure Monitor Agent (AMA)
+Confirms telemetry agent is installed and running on DC01.
+
+![AMA Status](evidence/screenshots/02-ama-status.png)
+
+---
+
+### 3. Heartbeat Validation
+Confirms partial connectivity between endpoint and Sentinel.
+
+![Heartbeat](evidence/screenshots/03-heartbeat.png)
+
+---
+
+### 4. Process Execution Logs (4688)
+Confirms partial SecurityEvent ingestion.
+
+![4688 Logs](evidence/screenshots/04-4688.png)
+
+---
+
+### 5. Missing Authentication Logs (4625)
+No failed authentication events observed in Sentinel.
+
+This indicates a visibility gap in the SIEM pipeline.
+
+![Missing 4625](evidence/screenshots/05-missing-4625.png)
+
+---
+
+### 6. Data Collection Rule (DCR)
+Configuration responsible for defining log ingestion scope.
+
+![DCR Config](evidence/screenshots/06-dcr-config.png)
+
+
+---
+
+## What This Evidence Demonstrates
+
+This investigation confirms a partial failure in the telemetry pipeline:
+
+- Endpoint connectivity established (Arc + AMA functional)
+- System-level logs partially ingested (4688, Heartbeat)
+- Authentication telemetry missing (4624/4625)
+
+### Key Insight
+A system can appear "healthy" at the agent level while still failing at the SIEM ingestion layer.
+
+This creates a critical visibility gap in security monitoring for authentication-based attacks.
 
