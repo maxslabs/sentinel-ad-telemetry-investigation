@@ -1,5 +1,11 @@
 # Active Directory SOC Incident Report – Azure Sentinel Lab
 
+![Status](https://img.shields.io/badge/status-incident%20report-red)
+![Azure Sentinel](https://img.shields.io/badge/SIEM-Microsoft%20Sentinel-blue)
+![Lab](https://img.shields.io/badge/type-SOC%20lab-green)
+
+# Active Directory SOC Incident Report – Azure Sentinel Lab
+
 ## 1. Executive Summary
 
 This project documents an Active Directory security monitoring lab using Microsoft Sentinel.  
@@ -124,4 +130,19 @@ The investigation highlights the importance of:
 ## 12. Status
 
 **Status:** Incident documented (incomplete ingestion / troubleshooting case study)
+
+
+---
+
+## Keywords
+Azure Sentinel, SOC, SIEM, Active Directory, Windows Security Events, Incident Response, Azure Arc, AMA, DCR, MITRE ATT&CK, Cybersecurity Lab, Log Analytics
+
+
+## Quick Summary
+
+- Built a full AD monitoring pipeline using Azure Sentinel
+- Investigated missing SecurityEvent ingestion (4624/4625)
+- Identified telemetry pipeline breakdown via Azure Arc + AMA + DCR
+- Documented full SOC-style incident report with MITRE mapping
+- Simulated real-world SIEM visibility failure scenario
 
