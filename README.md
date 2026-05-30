@@ -1,11 +1,5 @@
 # Active Directory SOC Incident Report – Azure Sentinel Lab
 
-![Status](https://img.shields.io/badge/status-incident%20report-red)
-![Azure Sentinel](https://img.shields.io/badge/SIEM-Microsoft%20Sentinel-blue)
-![Lab](https://img.shields.io/badge/type-SOC%20lab-green)
-
-# Active Directory SOC Incident Report – Azure Sentinel Lab
-
 ## 1. Executive Summary
 
 This project documents an Active Directory security monitoring lab using Microsoft Sentinel.  
