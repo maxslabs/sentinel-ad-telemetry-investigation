@@ -1,63 +1,59 @@
-# SOC Evidence Mapping System
+# SOC Evidence Mapping System – Active Directory Telemetry Investigation
 
-This document maps evidence collected during the Active Directory SOC ingestion investigation.
-
----
-
-## Evidence Structure
-
-### 1. Azure Arc Connectivity
-- Evidence Type: System status
-- Location: Azure Portal / Arc blade
-- Purpose: Confirm DC01 is onboarded and reporting
+This document maps collected evidence to specific components of the Azure Sentinel telemetry pipeline.
 
 ---
 
-### 2. AMA Agent Status
-- Evidence Type: Agent telemetry
-- Location: Windows Services / Azure Monitor Agent
-- Purpose: Validate data pipeline is active
+## Evidence Chain (End-to-End)
+
+### 1. Azure Arc Onboarding State
+- File: 01-arc-status.png
+- Purpose: Validate endpoint registration in Azure Arc
+- Finding: DC01 onboarded (status varies between connected/disconnected)
 
 ---
 
-### 3. Data Collection Rule (DCR)
-- Evidence Type: Configuration
-- Location: Azure Monitor / DCR Assignment
-- Purpose: Define which logs should be collected (SecurityEvent)
+### 2. Azure Monitor Agent (AMA)
+- File: 02-ama-status.png
+- Purpose: Confirm telemetry agent is installed and operational
+- Finding: AMA installed and running on DC01
 
 ---
 
-### 4. Sentinel Log Verification
-- Evidence Type: Query output
-- Location: Log Analytics Workspace
-- Queries:
-  - Heartbeat validation
-  - Event ID 4688 process logs
-  - Missing 4624 / 4625 authentication logs
+### 3. Sentinel Heartbeat Validation
+- File: 03-heartbeat.png
+- Purpose: Confirm baseline connectivity to Log Analytics workspace
+- Finding: Heartbeat logs present (partial connectivity confirmed)
 
 ---
 
-### 5. Attack Simulation Evidence
-- Evidence Type: Security events (expected but missing)
-- Source: RDP brute-force simulation (attacker VM)
-- Expected Logs:
-  - 4625 failed logons
-  - 4624 successful logons
+### 4. Process Execution Telemetry (4688)
+- File: 04-4688.png
+- Purpose: Validate system-level SecurityEvent ingestion
+- Finding: Process creation events successfully ingested
 
 ---
 
-## Evidence Status Summary
-
-| Evidence Type | Status |
-|----------------|--------|
-| Arc Connectivity | OK |
-| AMA Agent | OK |
-| DCR Assignment | Partial / Misconfigured |
-| SecurityEvent Logs | Missing |
-| Heartbeat Logs | Present |
-| Process Logs (4688) | Present |
+### 5. Authentication Telemetry Gap (4625)
+- File: 05-missing-4625.png
+- Purpose: Validate failed authentication logging
+- Finding: No failed logon events observed in Sentinel
 
 ---
 
-## Key Finding
-The pipeline is partially functional, but authentication telemetry is not flowing into Sentinel, creating a visibility gap in SOC monitoring.
+### 6. Data Collection Rule (DCR)
+- File: 06-dcr-config.png
+- Purpose: Define log ingestion scope and filtering rules
+- Finding: DCR configured but authentication events not fully ingested
+
+---
+
+## Summary of Evidence Flow
+
+Arc → AMA → Heartbeat → 4688 → Missing 4624/4625
+
+---
+
+## Key Observation
+
+Telemetry pipeline is partially functional but fails at authentication layer, creating a SIEM visibility gap for identity-based attacks.
