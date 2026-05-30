@@ -1,0 +1,22 @@
+digraph AD_SOC_Lab {
+
+rankdir=LR;
+node [shape=box, style=rounded];
+
+Internet [label="Attacker VM\n(Kali / Windows 11)"];
+DC01 [label="Windows Server 2022\nDomain Controller (DC01)"];
+Arc [label="Azure Arc Agent"];
+AMA [label="Azure Monitor Agent"];
+DCR [label="Data Collection Rule"];
+LAW [label="Log Analytics Workspace"];
+Sentinel [label="Microsoft Sentinel"];
+
+Internet -> DC01 [label="RDP Brute Force Simulation"];
+DC01 -> Arc [label="Onboarded Server"];
+Arc -> AMA [label="Telemetry Pipeline"];
+AMA -> DCR [label="Event Collection Rules"];
+DCR -> LAW [label="SecurityEvent / Logs"];
+LAW -> Sentinel [label="SIEM Ingestion"];
+
+DC01 -> LAW [label="Expected: 4624 / 4625\n(MISSING ISSUE)"];
+}
