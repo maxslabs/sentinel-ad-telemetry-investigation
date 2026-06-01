@@ -6,8 +6,6 @@
 
 ---
 
-# Active Directory SOC Incident Report – Azure Sentinel Lab
-
 ## 1. Executive Summary
 
 This project documents an Active Directory security monitoring lab using Microsoft Sentinel.  
