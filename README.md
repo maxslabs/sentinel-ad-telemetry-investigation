@@ -46,7 +46,7 @@ During the investigation, a critical issue was identified: **loss of authenticat
   - Event ID 4625 (failed logons)
 
 ### System State
-- Azure Arc initially connected, later intermittently disconnected
+- Azure Arc connected
 - AMA agent installed and running
 - DCR assigned but authentication logs not flowing
 
